@@ -176,7 +176,7 @@ instance Tokenize DTS.TsRecordField where
   tokenize (DTS.TsRecordField k { readonly, optional } v) =
     (if readonly then [ TsTokReadonly, TsTokWhitespace ] else [])
       <> [ TsTokStringLiteral k ]
-      <> (if optional then [ TsTokWhitespace ] else [])
+      <> (if optional then [ TsTokQuestionMark ] else [])
       <> [ TsTokColon, TsTokWhitespace ]
       <> tokenize v
       <> [ TsTokSemicolon, TsTokWhitespace ]

@@ -10,15 +10,15 @@ module DTS.Print
 
 import Prelude
 
+import DTS.Types as DTS
 import Data.Array (fold, intersperse)
 import Data.Array as Array
 import Data.Map (Map)
 import Data.Map as Map
-import Data.Maybe (maybe)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.Set.Ordered as OSet
 import Data.Tuple.Nested ((/\))
-import DTS.Types as DTS
 
 -------------------------------------------------------------------------------
 -- Types
@@ -132,6 +132,17 @@ instance Tokenize DTS.TsType where
 
     DTS.TsTypeUnion xs ->
       join $ intersperse [ TsTokWhitespace, TsTokPipe, TsTokWhitespace ] $ (wrapParens <<< tokenize) <$> xs
+
+    DTS.TsTypeRecord [] ->
+      tokenize
+        ( DTS.TsTypeConstructor
+            (DTS.TsQualName Nothing (DTS.TsName "Record"))
+            ( DTS.TsTypeArgs
+                [ DTS.TsTypeVar (DTS.TsName "string")
+                , DTS.TsTypeVar (DTS.TsName "never")
+                ]
+            )
+        )
 
     DTS.TsTypeRecord xs ->
       wrapBraces $

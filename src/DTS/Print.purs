@@ -133,6 +133,16 @@ instance Tokenize DTS.TsType where
     DTS.TsTypeUnion xs ->
       join $ intersperse [ TsTokWhitespace, TsTokPipe, TsTokWhitespace ] $ (wrapParens <<< tokenize) <$> xs
 
+    DTS.TsTypeReadonlyTuple xs ->
+      [ TsTokReadonly, TsTokWhitespace, TsTokOpenBracket ]
+        <> (join $ intersperse [ TsTokComma, TsTokWhitespace ] $ tokenize <$> xs)
+        <> [ TsTokCloseBracket ]
+
+    DTS.TsTypeTuple xs ->
+      [ TsTokOpenBracket ]
+        <> (join $ intersperse [ TsTokComma, TsTokWhitespace ] $ tokenize <$> xs)
+        <> [ TsTokCloseBracket ]
+
     DTS.TsTypeRecord [] ->
       tokenize
         ( DTS.TsTypeConstructor

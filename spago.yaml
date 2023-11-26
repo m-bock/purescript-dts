@@ -20,7 +20,7 @@ workspace:
   package_set:
     registry: 43.3.0
 publish:
-  version: 0.2.0
+  version: 0.3.0
   license: BSD-3-Clause
   location:
     githubOwner: thought2

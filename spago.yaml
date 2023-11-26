@@ -18,7 +18,7 @@ package:
     license: BSD-3-Clause
     location:
       githubOwner: thought2
-      githubRepo: purescript-ts-bridge
+      githubRepo: purescript-dts
 
 workspace:
   extra_packages: {}

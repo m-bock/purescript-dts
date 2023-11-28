@@ -15,7 +15,7 @@ import Data.Array (fold, intersperse)
 import Data.Array as Array
 import Data.Map (Map)
 import Data.Map as Map
-import Data.Maybe (Maybe(..), maybe)
+import Data.Maybe (maybe)
 import Data.Newtype (class Newtype, unwrap)
 import Data.Set.Ordered as OSet
 import Data.Tuple.Nested ((/\))
@@ -169,6 +169,8 @@ instance Tokenize DTS.TsType where
     DTS.TsTypeVoid -> [ TsTokVoid ]
 
     DTS.TsTypeTypelevelString str -> [ TsTokStringLiteral str ]
+
+    DTS.TsTypeTypelevelNumber num -> [ TsTokNumberLiteral num ]
 
 instance Tokenize DTS.TsFnArg where
   tokenize (DTS.TsFnArg k v) = tokenize k

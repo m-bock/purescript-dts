@@ -57,6 +57,7 @@ data TsType
   | TsTypeUniqueSymbol
   | TsTypeVar TsName
   | TsTypeTypelevelString String
+  | TsTypeTypelevelNumber Number
   | TsTypeVoid
 
 data TsModule = TsModule (Array TsDeclaration)
@@ -132,6 +133,7 @@ mapQuantifier f = case _ of
   TsTypeVar x -> TsTypeVar $ goTsName x
   TsTypeVoid -> TsTypeVoid
   TsTypeTypelevelString x -> TsTypeTypelevelString x
+  TsTypeTypelevelNumber x -> TsTypeTypelevelNumber x
 
   where
   goTsRecordField (TsRecordField x y z) = TsRecordField

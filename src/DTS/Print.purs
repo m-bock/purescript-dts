@@ -145,14 +145,7 @@ instance Tokenize DTS.TsType where
 
     DTS.TsTypeRecord [] ->
       tokenize
-        ( DTS.TsTypeConstructor
-            (DTS.TsQualName Nothing (DTS.TsName "Record"))
-            ( DTS.TsTypeArgs
-                [ DTS.TsTypeVar (DTS.TsName "string")
-                , DTS.TsTypeVar (DTS.TsName "never")
-                ]
-            )
-        )
+        (DTS.TsTypeVar (DTS.TsName "object"))
 
     DTS.TsTypeRecord xs ->
       wrapBraces $
